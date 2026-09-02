@@ -1,0 +1,61 @@
+/* =========================================================
+   AIR HOCKEY 3D — gescoped unter #airhockeyRoot
+   ========================================================= */
+
+.airhockey-shell {
+  max-width: 720px;
+}
+
+.airhockey-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 4px;
+}
+.airhockey-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: var(--g-panel, rgba(6,18,34,.55));
+  min-width: 160px;
+}
+.airhockey-p1 { border-color: rgba(0,229,255,.4); }
+.airhockey-p2 { border-color: rgba(207,66,255,.4); }
+.airhockey-score-label {
+  font-size: .72rem;
+  color: var(--g-text-dim, #6f93ab);
+  letter-spacing: .04em;
+}
+.airhockey-score-value {
+  font-family: var(--g-font-display, 'Orbitron', sans-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.airhockey-p1 .airhockey-score-value { color: var(--g-cyan, #00e5ff); }
+.airhockey-p2 .airhockey-score-value { color: var(--g-magenta, #cf42ff); }
+
+.airhockey-canvas-container {
+  width: 100%;
+  aspect-ratio: 12 / 20;
+  max-height: 62vh;
+  margin: 16px auto 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: #030a12;
+}
+.airhockey-canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 560px) {
+  .airhockey-canvas-container {
+    max-height: 50vh;
+  }
+}

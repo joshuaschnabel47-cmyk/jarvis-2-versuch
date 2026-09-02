@@ -1,0 +1,47 @@
+/* =========================================================
+   MINI-GOLF 3D — gescoped unter #minigolfRoot
+   ========================================================= */
+
+.minigolf-shell {
+  max-width: 720px;
+}
+
+.minigolf-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+  font-family: var(--g-font-display, 'Orbitron', sans-serif);
+  font-size: .82rem;
+  color: var(--g-cyan, #00e5ff);
+}
+.minigolf-hole-label {
+  color: var(--g-text, #dff6ff);
+  font-weight: 700;
+}
+.minigolf-strokes-label {
+  color: var(--g-gold, #ffb454);
+}
+
+.minigolf-canvas-container {
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  max-height: 60vh;
+  margin: 14px auto 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: #03140a;
+  cursor: crosshair;
+  touch-action: none;
+}
+.minigolf-canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 560px) {
+  .minigolf-canvas-container { max-height: 48vh; }
+}

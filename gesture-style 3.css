@@ -1,0 +1,76 @@
+/* =========================================================
+   GESTEN-SCANNER
+   ========================================================= */
+
+.gesture-stage {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 4 / 3;
+  margin: 14px auto;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  background: #030a12;
+}
+.gesture-video {
+  display: none;
+}
+.gesture-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform: scaleX(-1); /* Spiegelbild — fühlt sich natürlicher an */
+}
+.gesture-scanline {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 229, 255, 0.04) 0px,
+    rgba(0, 229, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.gesture-readout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.gesture-status {
+  font-size: .85rem;
+  color: var(--muted, #7895a8);
+}
+.gesture-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #00e5ff;
+}
+
+.gesture-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 14px;
+  font-size: .78rem;
+  color: var(--muted, #7895a8);
+}
+.gesture-legend span {
+  border: 1px solid var(--border, #1b3548);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.gesture-mode-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 10px 0;
+}

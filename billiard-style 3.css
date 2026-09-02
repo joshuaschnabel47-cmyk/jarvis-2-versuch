@@ -1,0 +1,60 @@
+/* =========================================================
+   BILLARD 3D — gescoped unter #billiardRoot
+   ========================================================= */
+
+.billiard-shell {
+  max-width: 760px;
+}
+
+.billiard-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 4px;
+}
+.billiard-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: var(--g-panel, rgba(6,18,34,.55));
+  min-width: 170px;
+}
+.billiard-p1 { border-color: rgba(0,229,255,.4); }
+.billiard-p2 { border-color: rgba(207,66,255,.4); }
+.billiard-score-label {
+  font-size: .72rem;
+  color: var(--g-text-dim, #6f93ab);
+  letter-spacing: .04em;
+}
+.billiard-score-value {
+  font-family: var(--g-font-display, 'Orbitron', sans-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--g-cyan, #00e5ff);
+}
+
+.billiard-canvas-container {
+  width: 100%;
+  aspect-ratio: 11 / 22;
+  max-height: 65vh;
+  margin: 16px auto 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: #030a12;
+  cursor: crosshair;
+  touch-action: none;
+}
+.billiard-canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 560px) {
+  .billiard-canvas-container { max-height: 55vh; }
+}

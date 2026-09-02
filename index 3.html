@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>JARVIS v5.0</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00bfff">
+    <link rel="icon" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <link
+        rel="stylesheet"
+        href="jarvis-style.css"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="chess-style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="games-style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="airhockey-style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="checkers-style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="minigolf-style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="billiard-style.css"
+    >
+    <link
+        rel="stylesheet"
+        href="gesture-style.css"
+    >
+</head>
+
+<body class="jarvis-preload jarvis-booting">
+<div id="hackCategoryNav" class="hack-category-nav" aria-label="Ethical-Hacking Hauptkategorien" style="display:none!important;visibility:hidden!important;pointer-events:none!important">
+  <button class="hack-main-category active" data-hack-category="analysis" type="button">ANALYSE</button>
+  <button class="hack-main-category" data-hack-category="crypto" type="button">KRYPTOGRAFIE</button>
+  <button class="hack-main-category" data-hack-category="defense" type="button">DEFENSIVE SICHERHEIT</button>
+  <button class="hack-main-category" data-hack-category="tools" type="button">TOOLS</button>
+  <button class="hack-main-category" data-hack-category="knowledge" type="button">WISSEN &amp; QUIZ</button>
+  <button class="hack-main-category green" data-hack-category="cyber" type="button">CYBER RANGE</button>
+  <button class="hack-main-category orange" data-hack-category="offensive" type="button">OFFENSIVE SIMULATION</button>
+  <button id="hackCategoryExit" class="hack-main-category exit" type="button">SCHULE</button>
+</div>
+<!-- =====================================================
+     JARVIS SECURITY START SCREEN
+     ===================================================== -->
+<div id="securityScreen" class="security-screen">
+  <div class="security-grid"></div>
+  <div class="security-content">
+    <div class="security-label">STARK PERSONAL SYSTEM</div>
+
+    <div id="reactorButton"
+         class="arc-reactor-button"
+         tabindex="0"
+         role="button"
+         aria-label="JARVIS starten">
+      <div class="reactor-outer-ring"></div>
+      <div class="reactor-ring ring-one"></div>
+      <div class="reactor-ring ring-two"></div>
+      <div class="reactor-ring ring-three"></div>
+      <div class="reactor-spokes"></div>
+      <div class="reactor-core">
+        <span>JARVIS</span>
+        <small>CORE</small>
+      </div>
+    </div>
+
+    <div class="start-caption">INITIALISIERUNG</div>
+    <div class="start-hint">REACTOR BERÜHREN ZUM STARTEN</div>
+
+    <div id="accessPanel" class="access-panel hidden">
+      <div class="access-title">SECURITY CLEARANCE</div>
+      <div class="access-subtitle">AUTORISIERTER ZUGANG ERFORDERLICH</div>
+
+      <div id="bioScanBlock" class="bio-scan-block">
+        <button id="bioScanStartBtn" class="ctrl-btn bio-scan-btn" type="button">🎯 Biometrischer Scan</button>
+        <div id="bioScanStage" class="bio-scan-stage hidden">
+          <video id="bioScanVideo" class="bio-scan-video" autoplay muted playsinline></video>
+          <canvas id="bioScanCanvas" class="bio-scan-canvas"></canvas>
+        </div>
+        <p id="bioScanStatus" class="bio-scan-status"></p>
+      </div>
+
+      <div class="access-divider">— oder Code eingeben —</div>
+
+      <form id="accessForm">
+        <input id="accessCodeInput"
+               type="password"
+               inputmode="numeric"
+               maxlength="6"
+               autocomplete="off"
+               placeholder="ACCESS CODE">
+        <button type="submit" class="primary-btn access-btn">AUTHENTIFIZIEREN</button>
+      </form>
+      <div id="accessError" class="access-error"></div>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     BOOT SCREEN
+     ===================================================== -->
+
+<div
+    id="bootScreen"
+    class="boot-screen hidden"
+>
+
+    <div class="boot-content">
+
+        <div class="boot-logo">
+            JARVIS
+        </div>
+
+        <div class="boot-version">
+            PERSONAL ASSISTANT // v4.0
+        </div>
+
+        <div
+            id="bootStatus"
+            class="boot-status"
+        >
+            INITIALISIERE JARVIS CORE...
+        </div>
+
+        <div
+            id="bootLoadingLabel"
+            class="boot-loading-label"
+        >
+            SYSTEM INITIALIZATION // LOADING...
+        </div>
+
+        <div class="progress-container">
+
+            <div
+                id="bootProgressBar"
+                class="progress-bar"
+            ></div>
+
+        </div>
+
+        <div
+            id="bootPercent"
+            class="boot-percent"
+        >
+            0%
+        </div>
+
+        <div
+            id="bootLines"
+            class="boot-lines"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     APPLICATION
+     ===================================================== -->
+
+<div
+    id="app"
+    class="app hidden"
+>
+<!-- V4.6 HACKING NAVIGATION: only visible inside Ethical Hacking mode -->
+<nav id="hackTopNavigation" class="hack-top-navigation" aria-label="Hacking-Modus">
+  <button id="hackNavExit" class="hack-nav exit" type="button">← SCHULE</button>
+  <button data-hack-tool="hackTool01" class="hack-nav" type="button">01 · HASH</button>
+  <button data-hack-tool="hackTool02" class="hack-nav" type="button">02 · BASE64</button>
+  <button data-hack-tool="hackTool03" class="hack-nav" type="button">03 · PASSWORT</button>
+  <button data-hack-tool="hackTool04" class="hack-nav" type="button">04 · DEFENSE</button>
+  <button data-hack-tool="hackTool05" class="hack-nav" type="button">05 · SYSTEM</button>
+  <button data-hack-tool="hackTool06" class="hack-nav" type="button">06 · URL</button>
+  <button data-hack-tool="hackTool07" class="hack-nav" type="button">07 · CAESAR</button>
+  <button data-hack-tool="hackTool08" class="hack-nav" type="button">08 · LOGS</button>
+  <button data-hack-tool="hackTool09" class="hack-nav" type="button">09 · QUIZ</button>
+  <button data-hack-tool="hackTool10" class="hack-nav" type="button">10 · WISSEN</button>
+  <button data-hack-tool="cyberRangePanel" class="hack-nav green" type="button">🟢 RANGE</button>
+  <button data-hack-tool="offensiveRangePanel" class="hack-nav orange" type="button">🟠 OFFENSIVE</button>
+</nav>
+
+
+    <!-- =================================================
+         TOPBAR
+         ================================================= -->
+
+    <header class="topbar">
+
+        <div>
+
+            <div class="brand">
+                JARVIS
+            </div>
+
+            <div class="subtitle">
+                PERSONAL ASSISTANT // v4.0
+            </div>
+
+        </div>
+
+        <div class="topbar-actions">
+
+            <button
+                id="schoolModeBtn"
+                class="category-btn active"
+                type="button"
+            >
+                SCHULE
+            </button>
+
+            <button
+                id="hackModeBtn"
+                class="category-btn hack-category-btn"
+                type="button"
+            >
+                ⟨/⟩ ETHICAL HACKING
+            </button>
+
+            <button
+                id="gamesModeBtn"
+                class="category-btn games-category-btn"
+                type="button"
+            >
+                🎮 SPIELE
+            </button>
+
+            <button
+                id="leisureModeBtn"
+                class="category-btn leisure-category-btn"
+                type="button"
+            >
+                🎲 FREIZEIT
+            </button>
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                ONLINE
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         DASHBOARD
+         ================================================= -->
+
+    <main class="dashboard">
+
+        <!-- =================================================
+             JARVIS COMMAND CENTER
+             ================================================= -->
+
+        <section class="panel jarvis-panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    JARVIS
+                </h2>
+
+                <span id="jarvisState">
+                    Bereit
+                </span>
+
+            </div>
+
+            <div
+                id="jarvisMessage"
+                class="jarvis-message"
+            >
+                System erfolgreich gestartet.
+                Wie kann ich behilflich sein?
+            </div>
+
+            <div class="command-area">
+
+                <input
+                    type="text"
+                    id="commandInput"
+                    placeholder="Befehl eingeben..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="sendCommandBtn"
+                    class="primary-btn"
+                    type="button"
+                >
+                    SENDEN
+                </button>
+
+                <button
+                    id="voiceBtn"
+                    class="voice-btn"
+                    type="button"
+                    title="Sprachsteuerung"
+                >
+                    🎤
+                </button>
+
+            </div>
+
+            <div
+                id="voiceStatus"
+                class="voice-status"
+            >
+                SPRACHSTEUERUNG BEREIT
+            </div>
+
+            <div class="examples">
+
+                <span>
+                    Beispiel:
+                </span>
+
+                <code>
+                    füge das Fach Mathe hinzu
+                </code>
+
+                <code>
+                    lösche das Fach Mathe
+                </code>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ETHICAL HACKING MODE // V4.0
+             ================================================= -->
+
+        <section
+            id="hackModePanel"
+            class="hack-mode-panel hidden"
+        >
+
+            <div class="hack-panel-header">
+
+                <div>
+                    <div class="hack-kicker">JARVIS SECURITY LAB // V4.0</div>
+                    <h2>ETHICAL HACKING</h2>
+                    <p>Defensive Lern-, Analyse- und Datenschutzwerkzeuge für eigene oder ausdrücklich autorisierte Systeme.</p>
+                </div>
+
+                <button
+                    id="leaveHackModeBtn"
+                    class="hack-secondary-btn"
+                    type="button"
+                >
+                    ZURÜCK ZU SCHULE
+                </button>
+
+            </div>
+
+            <div class="hack-status-strip">
+                <span>● DEFENSIVE MODE ACTIVE</span>
+                <span>LOCAL ANALYSIS</span>
+                <span>NO REMOTE SCANNING</span>
+            </div>
+
+            <div class="hack-tool-grid">
+
+                <article id="hackTool01" class="hack-tool-card" data-hack-category="crypto">
+                    <div class="hack-tool-code">HASH LAB</div>
+                    <h3>SHA-256 HASH</h3>
+                    <p>Berechnet lokal einen SHA-256-Hash für einen eingegebenen Text.</p>
+                    <textarea id="hashInput" class="hack-input" rows="3" placeholder="Text eingeben..."></textarea>
+                    <button id="hashBtn" class="hack-primary-btn" type="button">HASH BERECHNEN</button>
+                    <output id="hashOutput" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackTool02" class="hack-tool-card" data-hack-category="crypto">
+                    <div class="hack-tool-code">ENCODING LAB</div>
+                    <h3>BASE64</h3>
+                    <p>Lokales Kodieren und Dekodieren von Base64-Daten.</p>
+                    <textarea id="base64Input" class="hack-input" rows="3" placeholder="Text oder Base64 eingeben..."></textarea>
+                    <div class="hack-button-row">
+                        <button id="base64EncodeBtn" class="hack-primary-btn" type="button">ENCODE</button>
+                        <button id="base64DecodeBtn" class="hack-secondary-btn" type="button">DECODE</button>
+                    </div>
+                    <output id="base64Output" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackTool03" class="hack-tool-card" data-hack-category="defense">
+                    <div class="hack-tool-code">PASSWORD LAB</div>
+                    <h3>PASSWORT-CHECK</h3>
+                    <p>Prüft lokal Länge und grundlegende Zeichenvielfalt. Eingaben werden nicht gespeichert.</p>
+                    <input id="passwordCheckInput" class="hack-input" type="password" placeholder="Passwort eingeben..." autocomplete="off">
+                    <div class="hack-meter"><div id="passwordMeterBar"></div></div>
+                    <output id="passwordCheckOutput" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackTool04" class="hack-tool-card" data-hack-category="defense">
+                    <div class="hack-tool-code">DEFENSE CHECK</div>
+                    <h3>SECURITY CHECKLIST</h3>
+                    <p>Grundlegende defensive Maßnahmen für eigene Konten und Geräte.</p>
+                    <ul class="hack-checklist">
+                        <li>✓ Updates und Sicherheitspatches aktiv</li>
+                        <li>✓ Einzigartige Passwörter verwenden</li>
+                        <li>✓ MFA/2FA aktivieren</li>
+                        <li>✓ Nur eigene oder ausdrücklich freigegebene Systeme testen</li>
+                        <li>✓ Backups und Wiederherstellung prüfen</li>
+                    </ul>
+                </article>
+
+                <article id="hackTool05" class="hack-tool-card" data-hack-category="analysis">
+                    <div class="hack-tool-code">SYSTEM INFO</div>
+                    <h3>LOCAL SYSTEM CHECK</h3>
+                    <p>Zeigt nur Informationen an, die der Browser lokal bereitstellt.</p>
+                    <button id="systemInfoBtn" class="hack-primary-btn" type="button">SYSTEM ANALYSIEREN</button>
+                    <pre id="systemInfoOutput" class="hack-output hack-pre">BEREIT</pre>
+                </article>
+
+                <article id="hackTool06" class="hack-tool-card" data-hack-category="analysis">
+                    <div class="hack-tool-code">URL LAB</div>
+                    <h3>URL ANALYZER</h3>
+                    <p>Zerlegt eine URL lokal und markiert einfache Sicherheitsmerkmale. Es wird keine Verbindung zur Adresse aufgebaut.</p>
+                    <input id="urlInput" class="hack-input" type="text" placeholder="https://example.com/login">
+                    <button id="urlAnalyzeBtn" class="hack-primary-btn" type="button">URL ANALYSIEREN</button>
+                    <output id="urlOutput" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackTool07" class="hack-tool-card" data-hack-category="crypto">
+                    <div class="hack-tool-code">CRYPTO LAB</div>
+                    <h3>CAESAR-CIPHER</h3>
+                    <p>Eine einfache Lernübung zur Verschiebung von Buchstaben. Nur für Kryptografie-Grundlagen.</p>
+                    <textarea id="caesarInput" class="hack-input" rows="3" placeholder="Text eingeben..."></textarea>
+                    <div class="hack-inline-controls">
+                        <label for="caesarShift">SHIFT</label>
+                        <input id="caesarShift" class="hack-small-input" type="number" min="-25" max="25" value="3">
+                    </div>
+                    <div class="hack-button-row">
+                        <button id="caesarEncodeBtn" class="hack-primary-btn" type="button">VERSCHIEBEN</button>
+                        <button id="caesarDecodeBtn" class="hack-secondary-btn" type="button">ZURÜCK</button>
+                    </div>
+                    <output id="caesarOutput" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackTool08" class="hack-tool-card" data-hack-category="analysis">
+                    <div class="hack-tool-code">LOG LAB</div>
+                    <h3>LOCAL LOG ANALYZER</h3>
+                    <p>Analysiert einen eingefügten Logtext lokal und zählt INFO-, WARN- und ERROR-Einträge.</p>
+                    <textarea id="logInput" class="hack-input" rows="5" placeholder="2026-08-21 INFO System gestartet..."></textarea>
+                    <button id="logAnalyzeBtn" class="hack-primary-btn" type="button">LOG ANALYSIEREN</button>
+                    <output id="logOutput" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackTool09" class="hack-tool-card" data-hack-category="knowledge">
+                    <div class="hack-tool-code">SECURITY QUIZ</div>
+                    <h3>CYBER QUIZ</h3>
+                    <p>Teste dein Wissen über defensive Cybersecurity.</p>
+                    <div id="quizQuestion" class="quiz-question">FRAGE WIRD GELADEN...</div>
+                    <div id="quizAnswers" class="quiz-answers"></div>
+                    <output id="quizOutput" class="hack-output">0 PUNKTE</output>
+                    <button id="quizNextBtn" class="hack-secondary-btn" type="button">NÄCHSTE FRAGE</button>
+                </article>
+
+                <article id="hackTool10" class="hack-tool-card" data-hack-category="knowledge">
+                    <div class="hack-tool-code">KNOWLEDGE BASE</div>
+                    <h3>SECURITY KNOWLEDGE</h3>
+                    <p>Kurze Grundlagen zum Lernen.</p>
+                    <div class="knowledge-list">
+                        <details>
+                            <summary>HASH</summary>
+                            <p>Ein Hash ist eine Einweg-Funktion, die Daten auf eine feste Zeichenfolge abbildet.</p>
+                        </details>
+                        <details>
+                            <summary>MFA / 2FA</summary>
+                            <p>Ein zusätzlicher Faktor reduziert das Risiko, wenn ein Passwort bekannt wird.</p>
+                        </details>
+                        <details>
+                            <summary>HTTPS</summary>
+                            <p>HTTPS schützt die Verbindung zwischen Browser und Website durch TLS-Verschlüsselung.</p>
+                        </details>
+                        <details>
+                            <summary>PHISHING</summary>
+                            <p>Phishing versucht, Menschen durch täuschende Nachrichten oder Seiten zur Preisgabe von Daten zu bewegen.</p>
+                        </details>
+                    </div>
+                </article>
+
+                <article id="hackToolCodeGenerator" class="hack-tool-card" data-hack-category="tools">
+                    <div class="hack-tool-code">TOOLS</div>
+                    <h3>CODE GENERATOR</h3>
+                    <p>Erzeugt harmlose Beispiel-Snippets für HTML, CSS und JavaScript.</p>
+                    <select id="codeGeneratorType" class="hack-select">
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="js">JavaScript</option>
+                    </select>
+                    <button id="codeGeneratorBtn" class="hack-primary-btn" type="button">CODE ERZEUGEN</button>
+                    <pre id="codeGeneratorOutput" class="hack-output hack-pre">BEREIT</pre>
+                </article>
+
+                <article id="hackToolPasswordGenerator" class="hack-tool-card" data-hack-category="tools">
+                    <div class="hack-tool-code">TOOLS</div>
+                    <h3>PASSWORT-GENERATOR</h3>
+                    <p>Erzeugt lokal zufällige Testpasswörter.</p>
+                    <input id="generatorLength" class="hack-small-input" type="number" min="8" max="64" value="20">
+                    <button id="generatePasswordV2Btn" class="hack-primary-btn" type="button">GENERIEREN</button>
+                    <output id="generatedPasswordOutput" class="hack-output">BEREIT</output>
+                </article>
+
+                <article id="hackToolFileHash" class="hack-tool-card" data-hack-category="tools">
+                    <div class="hack-tool-code">TOOLS</div>
+                    <h3>DATEI-HASH</h3>
+                    <p>Berechnet lokal den SHA-256-Hash einer ausgewählten Datei.</p>
+                    <input id="fileHashInput" class="hack-input" type="file">
+                    <button id="fileHashBtn" class="hack-primary-btn" type="button">HASH BERECHNEN</button>
+                    <output id="fileHashOutput" class="hack-output">BEREIT</output>
+                </article>
+
+            </div>
+
+            <div class="hack-disclaimer">
+                ETHICAL MODE // Nur auf eigenen oder ausdrücklich autorisierten Systemen arbeiten.
+            </div>
+
+        </section>
+
+        <!-- =================================================
+             MODULE
+             ================================================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- FAVORITEN -->
+
+            <section class="panel panel-wide favorites-panel hidden" id="favoritesPanel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>⭐ FAVORITEN</h2>
+                        <span>ANGEPINNTE PANELS</span>
+                    </div>
+                </div>
+
+                <div id="favoritesList" class="favorites-list"></div>
+
+            </section>
+
+
+            <!-- HEUTE-ÜBERSICHT -->
+
+            <section class="panel panel-wide today-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>📋 HEUTE</h2>
+                        <span>DEIN TAG AUF EINEN BLICK</span>
+                    </div>
+                    <div id="todayStreak" class="today-streak">🔥 0 Tage</div>
+                </div>
+
+                <div id="todayOverview" class="today-overview"></div>
+
+            </section>
+
+
+            <!-- WAS JETZT? -->
+
+            <section class="panel panel-wide whatnow-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>🎯 WAS JETZT?</h2>
+                        <span>DEINE PRIORITÄT GERADE EBEN</span>
+                    </div>
+                </div>
+
+                <div id="whatNowContent"></div>
+
+            </section>
+
+
+            <!-- ÜBUNGSBLÄTTER FINDEN -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>📄 ÜBUNGSBLÄTTER FINDEN</h2>
+                        <span>KOSTENLOSE PDFS ONLINE</span>
+                    </div>
+                </div>
+
+                <p class="pomo-hint">Sucht online nach kostenlosen PDF-Arbeitsblättern zu einem Thema. Öffnet die Trefferliste in einem neuen Tab — JARVIS selbst zeigt keine Inhalte an.</p>
+
+                <div class="wb-form">
+                    <input id="worksheetTopic" type="text" placeholder="Thema (z. B. Bruchrechnung)">
+                    <select id="worksheetSubject">
+                        <option value="">Kein Fach</option>
+                    </select>
+                    <button id="worksheetSearchBtn" class="small-add-btn" type="button">🔍</button>
+                </div>
+
+                <div id="worksheetResults" class="worksheet-results"></div>
+
+            </section>
+
+
+            <!-- FÄCHER -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            FÄCHER
+                        </h2>
+
+                        <span>
+                            SUBJECT DATABASE
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="addSubjectBtn"
+                        class="small-add-btn"
+                        type="button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div
+                    id="subjectsList"
+                    class="list"
+                ></div>
+
+            </section>
+
+
+            <!-- HAUSAUFGABEN -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            HAUSAUFGABEN
+                        </h2>
+
+                        <span>
+                            HOMEWORK
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="addHomeworkBtn"
+                        class="small-add-btn"
+                        type="button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div
+                    id="homeworkList"
+                    class="list"
+                ></div>
+
+            </section>
+
+
+            <!-- TAGESZIELE -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            TAGESZIELE
+                        </h2>
+
+                        <span>
+                            DAILY OBJECTIVES
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="addTaskBtn"
+                        class="small-add-btn"
+                        type="button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div
+                    id="tasksList"
+                    class="list"
+                ></div>
+
+            </section>
+
+
+            <!-- NOTIZEN -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            NOTIZEN
+                        </h2>
+
+                        <span>
+                            NOTES
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="addNoteBtn"
+                        class="small-add-btn"
+                        type="button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div
+                    id="notesList"
+                    class="list"
+                ></div>
+
+            </section>
+
+
+            <!-- KLASSENARBEITEN -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            KLASSENARBEITEN
+                        </h2>
+
+                        <span>
+                            EXAMS
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="addExamBtn"
+                        class="small-add-btn"
+                        type="button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div
+                    id="examsList"
+                    class="list"
+                ></div>
+
+            </section>
+
+
+            <!-- TERMINE -->
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            TERMINE
+                        </h2>
+
+                        <span>
+                            APPOINTMENTS
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="addAppointmentBtn"
+                        class="small-add-btn"
+                        type="button"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div
+                    id="appointmentsList"
+                    class="list"
+                ></div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================================
+             VOKABELKARTEN
+             ================================================= -->
+
+        <section class="panel vocabulary-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        VOKABELKARTEN
+                    </h2>
+
+                    <span>
+                        NEURAL LEARNING SYSTEM
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="vocabulary-form">
+
+                <div class="form-group">
+
+                    <label for="vocabularySubject">
+                        Fach
+                    </label>
+
+                    <select
+                        id="vocabularySubject"
+                    >
+                        <option value="">
+                            Allgemein
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="vocabularyFront">
+                        Vokabel
+                    </label>
+
+                    <input
+                        id="vocabularyFront"
+                        type="text"
+                        placeholder="z. B. house"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="vocabularyBack">
+                        Übersetzung
+                    </label>
+
+                    <input
+                        id="vocabularyBack"
+                        type="text"
+                        placeholder="z. B. Haus"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <button
+                    id="addVocabularyBtn"
+                    class="primary-btn vocabulary-add-btn"
+                    type="button"
+                >
+                    VOKABEL HINZUFÜGEN
+                </button>
+
+            </div>
+
+            <div class="vocabulary-csv-row">
+                <button id="vocabExportCsvBtn" class="ctrl-btn" type="button">⬇ Als CSV exportieren</button>
+                <button id="vocabImportCsvBtn" class="ctrl-btn" type="button">⬆ CSV importieren</button>
+                <input id="vocabCsvFileInput" type="file" accept=".csv,text/csv" class="hidden">
+            </div>
+            <p id="vocabCsvStatus" class="pomo-hint"></p>
+
+            <div class="flashcard-area">
+
+                <select
+                    id="vocabularySubjectFilter"
+                    class="vocabulary-filter"
+                >
+
+                    <option value="all">
+                        ALLE FÄCHER
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="flashcard"
+                    class="flashcard"
+                    tabindex="0"
+                >
+
+                    <div
+                        id="flashcardSubject"
+                        class="flashcard-subject"
+                    >
+                        KEINE VOKABEL
+                    </div>
+
+                    <div
+                        id="flashcardText"
+                        class="flashcard-text"
+                    >
+                        Noch keine passende Vokabel vorhanden.
+                    </div>
+
+                    <div
+                        id="flashcardHint"
+                        class="flashcard-hint"
+                    >
+                        Füge eine Vokabel hinzu.
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="flashcardCounter"
+                    class="flashcard-counter"
+                >
+                    0 / 0
+                </div>
+
+
+                <div class="flashcard-controls">
+
+                    <button
+                        id="previousCardBtn"
+                        class="secondary-btn"
+                        type="button"
+                    >
+                        ← ZURÜCK
+                    </button>
+
+                    <button
+                        id="flipCardBtn"
+                        class="primary-btn"
+                        type="button"
+                    >
+                        UMDREHEN
+                    </button>
+
+                    <button
+                        id="nextCardBtn"
+                        class="secondary-btn"
+                        type="button"
+                    >
+                        WEITER →
+                    </button>
+
+                </div>
+
+
+                <div class="flashcard-rating">
+
+                    <button
+                        id="unknownCardBtn"
+                        class="rating-btn rating-unknown"
+                        type="button"
+                    >
+                        ✕ NOCH NICHT
+                    </button>
+
+                    <button
+                        id="knownCardBtn"
+                        class="rating-btn rating-known"
+                        type="button"
+                    >
+                        ✓ GEWUSST
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="learningStats"
+                    class="learning-stats"
+                >
+                    GEWUSST: 0 // NOCH NICHT: 0
+                </div>
+
+            </div>
+
+
+            <div class="vocabulary-divider">
+                GESPEICHERTE VOKABELN
+            </div>
+
+
+            <div
+                id="vocabularyList"
+                class="list"
+            ></div>
+
+        </section>
+
+
+        <!-- =================================================
+             BEFEHLE
+             ================================================= -->
+
+        <section class="panel command-list-panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    JARVIS BEFEHLE
+                </h2>
+
+                <span>
+                    COMMAND DATABASE
+                </span>
+
+            </div>
+
+            <div class="commands-grid">
+
+                <div class="command-group">
+
+                    <h3>
+                        SYSTEM
+                    </h3>
+
+                    <code>hilfe</code>
+                    <code>status</code>
+                    <code>uhrzeit</code>
+                    <code>öffne youtube music</code>
+
+                </div>
+
+
+                <div class="command-group">
+
+                    <h3>
+                        FÄCHER
+                    </h3>
+
+                    <code>zeige fächer</code>
+                    <code>füge das Fach Mathe hinzu</code>
+                    <code>füge Mathe als Fach hinzu</code>
+                    <code>lösche das Fach Mathe</code>
+
+                </div>
+
+
+                <div class="command-group">
+
+                    <h3>
+                        SCHULE
+                    </h3>
+
+                    <code>zeige hausaufgaben</code>
+                    <code>zeige tagesziele</code>
+                    <code>zeige notizen</code>
+                    <code>zeige klassenarbeiten</code>
+                    <code>zeige termine</code>
+
+                </div>
+
+
+                <div class="command-group">
+
+                    <h3>
+                        VOKABELN
+                    </h3>
+
+                    <code>vokabeln</code>
+                    <code>füge vokabel house - Haus hinzu</code>
+                    <code>vokabel umdrehen</code>
+                    <code>nächste vokabel</code>
+                    <code>vorherige vokabel</code>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Wrapper für alle weiteren Schul-Panels, damit sie im
+             Hacking-Modus korrekt mit ausgeblendet werden. -->
+        <div class="dashboard-grid">
+
+        <!-- WAKEBOARD LOG -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>WAKEBOARD LOG</h2>
+                    <span>SESSION TRACKER</span>
+                </div>
+            </div>
+
+            <div class="wb-form">
+                <input id="wbTrick" type="text" placeholder="Trick (z. B. Backroll)">
+                <input id="wbSpot" type="text" placeholder="Spot" value="Kabelpark Kalletal">
+                <input id="wbMinutes" type="number" min="1" placeholder="Minuten">
+                <button id="wbAddBtn" class="small-add-btn" type="button">+</button>
+            </div>
+
+            <div id="wbList" class="list"></div>
+
+        </section>
+
+        <!-- CALISTHENICS -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>CALISTHENICS</h2>
+                    <span>WORKOUT LOG</span>
+                </div>
+            </div>
+
+            <div class="wb-form">
+                <input id="caliExercise" type="text" placeholder="Übung (z. B. Klimmzüge)">
+                <input id="caliSets" type="number" min="1" placeholder="Sätze">
+                <input id="caliReps" type="number" min="1" placeholder="Wdh. pro Satz">
+                <button id="caliAddBtn" class="small-add-btn" type="button">+</button>
+            </div>
+
+            <div id="caliList" class="list"></div>
+
+        </section>
+
+        <!-- POMODORO TIMER -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>POMODORO</h2>
+                    <span>FOKUS-TIMER</span>
+                </div>
+            </div>
+
+            <div class="pomo-display">
+                <span id="pomoTime">25:00</span>
+                <span id="pomoPhase" class="pomo-phase">FOKUS</span>
+            </div>
+            <div class="pomo-controls">
+                <button id="pomoStartBtn" class="ctrl-btn" type="button">▶ Start</button>
+                <button id="pomoPauseBtn" class="ctrl-btn" type="button">⏸ Pause</button>
+                <button id="pomoResetBtn" class="ctrl-btn" type="button">↺ Reset</button>
+            </div>
+            <p class="pomo-hint" id="pomoRounds">Runden heute: 0</p>
+
+        </section>
+
+        <!-- NOTENRECHNER -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>NOTENRECHNER</h2>
+                    <span>DURCHSCHNITT</span>
+                </div>
+            </div>
+
+            <div class="wb-form">
+                <input id="gradeInput" type="number" min="1" max="6" step="0.5" placeholder="Note (1–6)">
+                <input id="gradeWeight" type="number" min="1" max="10" placeholder="Gewichtung" value="1">
+                <button id="gradeAddBtn" class="small-add-btn" type="button">+</button>
+            </div>
+
+            <div id="gradeList" class="list"></div>
+            <p class="pomo-hint" id="gradeAverage">Durchschnitt: —</p>
+
+        </section>
+
+        <!-- TASCHENRECHNER -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>TASCHENRECHNER</h2>
+                    <span>SCHNELLRECHNER</span>
+                </div>
+            </div>
+
+            <div class="calc-display" id="calcDisplay">0</div>
+            <div class="calc-grid">
+                <button class="calc-btn calc-op" data-calc="clear">C</button>
+                <button class="calc-btn calc-op" data-calc="back">⌫</button>
+                <button class="calc-btn calc-op" data-calc="/">÷</button>
+                <button class="calc-btn calc-op" data-calc="*">×</button>
+                <button class="calc-btn" data-calc="7">7</button>
+                <button class="calc-btn" data-calc="8">8</button>
+                <button class="calc-btn" data-calc="9">9</button>
+                <button class="calc-btn calc-op" data-calc="-">−</button>
+                <button class="calc-btn" data-calc="4">4</button>
+                <button class="calc-btn" data-calc="5">5</button>
+                <button class="calc-btn" data-calc="6">6</button>
+                <button class="calc-btn calc-op" data-calc="+">+</button>
+                <button class="calc-btn" data-calc="1">1</button>
+                <button class="calc-btn" data-calc="2">2</button>
+                <button class="calc-btn" data-calc="3">3</button>
+                <button class="calc-btn calc-op calc-eq" data-calc="=" rowspan="2">=</button>
+                <button class="calc-btn calc-zero" data-calc="0">0</button>
+                <button class="calc-btn" data-calc=".">,</button>
+            </div>
+
+        </section>
+
+        <!-- STUNDENPLAN -->
+
+        <section class="panel panel-wide">
+
+            <div class="panel-header">
+                <div>
+                    <h2>STUNDENPLAN</h2>
+                    <span>WOCHENRASTER</span>
+                </div>
+            </div>
+
+            <div id="scheduleGrid" class="schedule-grid"></div>
+            <p class="pomo-hint">Klicke in ein Feld, um ein Fach einzutragen. Leer lassen zum Löschen.</p>
+
+        </section>
+
+        <!-- FORMELSAMMLUNG -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>FORMELSAMMLUNG</h2>
+                    <span>REFERENZKARTEN</span>
+                </div>
+            </div>
+
+            <input id="formulaSearch" type="text" class="wb-search" placeholder="Suche z. B. 'Fläche', 'Prozent', 'Ohm'...">
+            <div id="formulaList" class="formula-list"></div>
+
+            <div class="wb-form formula-add-form">
+                <input id="formulaTitleInput" type="text" placeholder="Titel (z. B. Volumen Kugel)">
+                <input id="formulaEqInput" type="text" placeholder="Formel (z. B. V = 4/3 · π · r³)">
+                <button id="formulaAddBtn" class="small-add-btn" type="button">+</button>
+            </div>
+
+        </section>
+
+        <!-- LERN-ASSISTENT -->
+
+        <section class="panel panel-wide">
+
+            <div class="panel-header">
+                <div>
+                    <h2>LERN-ASSISTENT</h2>
+                    <span>LOKALER HELFER · KEINE ECHTE KI</span>
+                </div>
+            </div>
+
+            <p class="pomo-hint">Durchsucht deine Fächer, Notizen &amp; Vokabeln lokal im Browser. Keine Internetverbindung, kein echtes Sprachmodell.</p>
+
+            <div id="assistantLog" class="assistant-log">
+                <div class="assistant-msg assistant-msg-bot">Hi! Frag mich z. B. "was ist heute fällig", "erkläre Prozentrechnung" oder "vokabeln haus".</div>
+            </div>
+
+            <div class="wb-form">
+                <input id="assistantInput" type="text" placeholder="Frage eingeben...">
+                <button id="assistantSendBtn" class="small-add-btn" type="button">➤</button>
+            </div>
+
+        </section>
+
+        <!-- SPACED REPETITION -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>KARTEIKARTEN-WIEDERHOLUNG</h2>
+                    <span>SPACED REPETITION</span>
+                </div>
+            </div>
+
+            <p id="srDueCount" class="pomo-hint">Lade fällige Karten...</p>
+
+            <div id="srCard" class="sr-card hidden">
+                <div id="srCardFace" class="sr-card-face">—</div>
+                <button id="srFlipBtn" class="ctrl-btn" type="button">🔄 Umdrehen</button>
+                <div class="sr-rate-row">
+                    <button id="srAgainBtn" class="sr-btn sr-again" type="button">😕 Nochmal</button>
+                    <button id="srGoodBtn" class="sr-btn sr-good" type="button">🙂 Kenn ich</button>
+                    <button id="srEasyBtn" class="sr-btn sr-easy" type="button">😄 Einfach</button>
+                </div>
+            </div>
+            <p id="srEmptyHint" class="empty-hint hidden">Keine Karten fällig — alles gelernt! Komm später wieder.</p>
+
+        </section>
+
+        <!-- HAUSAUFGABEN-ERINNERUNG -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>ERINNERUNGEN</h2>
+                    <span>BROWSER-BENACHRICHTIGUNGEN</span>
+                </div>
+            </div>
+
+            <p class="pomo-hint">Erinnert dich an Hausaufgaben, die heute oder morgen fällig sind.</p>
+            <button id="notifyEnableBtn" class="ctrl-btn" type="button">🔔 Benachrichtigungen aktivieren</button>
+            <p id="notifyStatus" class="pomo-hint">Status: nicht aktiviert.</p>
+
+        </section>
+
+        <!-- PRÜFUNGS-COUNTDOWN -->
+
+        <section class="panel panel-wide">
+
+            <div class="panel-header">
+                <div>
+                    <h2>PRÜFUNGS-COUNTDOWN</h2>
+                    <span>PRO FACH</span>
+                </div>
+            </div>
+
+            <div id="examCountdownList" class="exam-countdown-list"></div>
+
+        </section>
+
+        <!-- WETTER KABELPARK KALLETAL -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>WETTER · KABELPARK</h2>
+                    <span>KALLETAL LIVE</span>
+                </div>
+            </div>
+
+            <div id="weatherWidget" class="weather-widget">
+                <p class="pomo-hint">Lade Wetterdaten...</p>
+            </div>
+
+        </section>
+
+        <!-- WAKEBOARD TRICK-CHECKLISTE -->
+
+        <section class="panel panel-wide">
+
+            <div class="panel-header">
+                <div>
+                    <h2>TRICK-FORTSCHRITT</h2>
+                    <span>WAKEBOARD CHECKLISTE</span>
+                </div>
+            </div>
+
+            <div id="trickChecklist" class="trick-checklist"></div>
+
+        </section>
+
+        <!-- REFERATE-TIMER -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>REFERATE-TIMER</h2>
+                    <span>REDEZEIT-COUNTDOWN</span>
+                </div>
+            </div>
+
+            <div class="wb-form">
+                <input id="talkMinutes" type="number" min="1" placeholder="Minuten" value="5">
+                <input id="talkWarnMinutes" type="number" min="0" placeholder="Warnung vor (Min)" value="1">
+            </div>
+            <div class="pomo-display">
+                <span id="talkTime">05:00</span>
+            </div>
+            <div class="pomo-controls">
+                <button id="talkStartBtn" class="ctrl-btn" type="button">▶ Start</button>
+                <button id="talkPauseBtn" class="ctrl-btn" type="button">⏸ Pause</button>
+                <button id="talkResetBtn" class="ctrl-btn" type="button">↺ Reset</button>
+            </div>
+
+        </section>
+
+        <!-- FACH-STATISTIK -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>FACH-STATISTIK</h2>
+                    <span>POMODORO-ZEIT PRO FACH</span>
+                </div>
+            </div>
+
+            <div class="wb-form">
+                <select id="pomoSubjectSelect"><option value="">Kein Fach zugeordnet</option></select>
+            </div>
+            <div id="subjectStatsList" class="list"></div>
+
+        </section>
+
+        <!-- KALENDER-EXPORT -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>KALENDER-EXPORT</h2>
+                    <span>.ICS FÜR DEIN HANDY</span>
+                </div>
+            </div>
+
+            <p class="pomo-hint">Exportiert Hausaufgaben &amp; Klassenarbeiten als Kalenderdatei zum Importieren.</p>
+            <button id="icsExportBtn" class="ctrl-btn" type="button">📅 .ics herunterladen</button>
+
+        </section>
+
+        <!-- ACHIEVEMENTS -->
+
+        <section class="panel panel-wide">
+
+            <div class="panel-header">
+                <div>
+                    <h2>ACHIEVEMENTS</h2>
+                    <span>SCHULE · SPIELE · HACKING</span>
+                </div>
+            </div>
+
+            <div id="achievementList" class="achievement-list"></div>
+
+            <div class="pomo-controls" style="margin-top:14px;">
+                <button id="sharecardBtn" class="ctrl-btn" type="button">📤 Sharecard erstellen</button>
+            </div>
+            <canvas id="sharecardCanvas" class="sharecard-canvas hidden" width="900" height="500"></canvas>
+            <a id="sharecardDownload" class="hidden" download="jarvis-sharecard.png"></a>
+
+        </section>
+
+        <!-- BACKUP / WIEDERHERSTELLEN -->
+
+        <section class="panel">
+
+            <div class="panel-header">
+                <div>
+                    <h2>BACKUP</h2>
+                    <span>EXPORT / IMPORT</span>
+                </div>
+            </div>
+
+            <p class="pomo-hint">Sichert alle deine Daten (Fächer, Noten, Spielstände, Vokabeln, ...) als eine Datei.</p>
+            <div class="pomo-controls">
+                <button id="backupExportBtn" class="ctrl-btn" type="button">⬇ Backup exportieren</button>
+                <button id="backupImportBtn" class="ctrl-btn" type="button">⬆ Backup importieren</button>
+            </div>
+            <input id="backupFileInput" type="file" accept="application/json" class="hidden">
+            <p id="backupStatus" class="pomo-hint"></p>
+
+        </section>
+
+        </div>
+        <!-- /Schul-Panels Wrapper -->
+
+    <section id="cyberRangePanel" class="panel cyber-range-panel" data-hack-category="cyber">
+        <div class="panel-header">
+          <div>
+            <h2>JARVIS // CYBER RANGE</h2>
+            <p>Isolierte Trainingssimulation – keine echten Systeme werden angesprochen.</p>
+          </div>
+          <span id="rangeStatus" class="range-badge">SIMULATION READY</span>
+        </div>
+
+        <div class="range-toolbar">
+          <label>Scenario
+            <select id="rangeScenario">
+              <option value="blackout">BLACKOUT — Suspicious Activity</option>
+              <option value="phishing">PHANTOM — Phishing Incident</option>
+              <option value="insider">ECHO — Insider Anomaly</option>
+            </select>
+          </label>
+          <label>Difficulty
+            <select id="rangeDifficulty">
+              <option value="beginner">BEGINNER</option>
+              <option value="intermediate">INTERMEDIATE</option>
+              <option value="advanced">ADVANCED</option>
+            </select>
+          </label>
+          <button id="startRangeBtn" class="range-start-btn">START SIMULATION</button>
+        </div>
+
+        <div class="range-grid">
+          <div class="range-network-card">
+            <div class="range-card-title">VIRTUAL NETWORK</div>
+            <div id="rangeNetwork" class="range-network">
+              <div class="range-node normal" data-node="internet">INTERNET</div>
+              <div class="range-link"></div>
+              <div class="range-node normal" data-node="router">ROUTER</div>
+              <div class="range-branches">
+                <div class="range-branch">
+                  <div class="range-node normal" data-node="web">WEB-01</div>
+                  <div class="range-node normal" data-node="db">DB-01</div>
+                </div>
+                <div class="range-branch">
+                  <div class="range-node normal" data-node="pc1">PC-01</div>
+                  <div class="range-node normal" data-node="pc2">PC-02</div>
+                </div>
+                <div class="range-branch">
+                  <div class="range-node normal" data-node="pc3">PC-03</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="range-event-card">
+            <div class="range-card-title">LIVE EVENT LOG</div>
+            <div id="rangeLog" class="range-log">
+              <div>&gt; Waiting for simulation...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="range-status-grid">
+          <div class="range-stat">
+            <span>THREAT LEVEL</span>
+            <strong id="rangeThreat">0%</strong>
+            <div class="range-meter"><div id="rangeThreatBar"></div></div>
+          </div>
+          <div class="range-stat">
+            <span>AFFECTED SYSTEMS</span>
+            <strong id="rangeAffected">0</strong>
+          </div>
+          <div class="range-stat">
+            <span>MISSION SCORE</span>
+            <strong id="rangeScore">0</strong>
+          </div>
+          <div class="range-stat">
+            <span>TIME</span>
+            <strong id="rangeTime">00:00</strong>
+          </div>
+        </div>
+
+        <div class="range-actions">
+          <button data-range-action="investigate">🔍 INVESTIGATE</button>
+          <button data-range-action="analyze">📋 ANALYZE LOGS</button>
+          <button data-range-action="isolate">🛡️ ISOLATE SYSTEM</button>
+          <button data-range-action="contain">🚨 CONTAIN INCIDENT</button>
+        </div>
+
+        <div id="rangeMission" class="range-mission">
+          <strong>MISSION BRIEFING</strong>
+          <p>Starte eine Simulation. Deine Aufgabe ist es, die künstlichen Ereignisse zu untersuchen und den Vorfall defensiv einzudämmen.</p>
+        </div>
+      </section>
+<section id="offensiveRangePanel" class="panel offensive-range-panel" data-hack-category="offensive">
+  <div class="panel-header">
+    <div>
+      <h2>🟠 OFFENSIVE SIMULATION</h2>
+      <p>Rote-Team-Labor mit vollständig künstlichen Beacon-Ereignissen.</p>
+    </div>
+    <span class="offensive-badge">NUR SIMULATION</span>
+  </div>
+  <div class="offensive-warning">
+    ⚠️ Keine echten Netzwerkverbindungen: Ziele, Beacon-Telemetrie und Ereignisse
+    sind vollständig virtuell und werden nur in dieser Oberfläche erzeugt.
+  </div>
+  <div class="offensive-toolbar">
+    <label>Szenario
+      <select id="offensiveScenario">
+        <option value="beacon">BEACON · Periodische Telemetrie</option>
+        <option value="lateral">LATERAL · Bewegungs-Simulation</option>
+        <option value="exfil">EXFIL · Datenabfluss-Simulation</option>
+      </select>
+    </label>
+    <label>Intensität
+      <select id="offensiveIntensity">
+        <option value="low">NIEDRIG</option>
+        <option value="medium">MITTEL</option>
+        <option value="high">HOCH</option>
+      </select>
+    </label>
+    <button id="startOffensiveBtn" class="offensive-start-btn">SIMULATION AUSFÜHREN</button>
+    <button id="stopOffensiveBtn" class="offensive-stop-btn">STOPP</button>
+  </div>
+  <div class="offensive-grid">
+    <div class="offensive-card">
+      <div class="offensive-card-title">SIMULIERTE ZIELE</div>
+      <div class="fake-targets">
+        <div class="fake-target" data-off-target="red-pc01">PC-01 <span>●</span></div>
+        <div class="fake-target" data-off-target="red-pc02">PC-02 <span>●</span></div>
+        <div class="fake-target" data-off-target="red-web01">WEB-01 <span>●</span></div>
+        <div class="fake-target" data-off-target="red-db01">DB-01 <span>●</span></div>
+      </div>
+    </div>
+    <div class="offensive-card">
+      <div class="offensive-card-title">BEACON-TELEMETRIE</div>
+      <div id="beaconTelemetry" class="beacon-telemetry">
+        <div>&gt; Noch keine Simulation aktiv.</div>
+      </div>
+    </div>
+  </div>
+  <div class="offensive-stats">
+    <div><span>BEACON-EREIGNISSE</span><strong id="beaconCount">0</strong></div>
+    <div><span>SIMULIERTE ZIELE</span><strong id="offTargetCount">0</strong></div>
+    <div><span>ERKENNUNG</span><strong id="offDetection">0%</strong></div>
+    <div><span>STATUS</span><strong id="offPhase">BEREIT</strong></div>
+  </div>
+  <div class="offensive-actions">
+    <button data-off-action="observe">🔎 TELEMETRIE BEOBACHTEN</button>
+    <button data-off-action="simulateBeacon">📡 BEACON AUSLÖSEN</button>
+    <button data-off-action="simulateMove">↔️ BEWEGUNG SIMULIEREN</button>
+    <button data-off-action="simulateExfil">📦 ABFLUSS SIMULIEREN</button>
+    <button data-off-action="reset">↻ ZURÜCKSETZEN</button>
+  </div>
+</section>
+</main>
+
+<!-- =================================================
+     SPIELE-MODUS // GAMES HUB (Schach, Vier Gewinnt, Memory)
+     ================================================= -->
+<div id="gamesRoot" class="hidden">
+
+  <div class="games-holo-floor" aria-hidden="true"></div>
+  <div class="games-vignette" aria-hidden="true"></div>
+
+  <!-- Spielauswahl -->
+  <div id="games-launcher" class="games-launcher">
+    <header class="games-launcher-header">
+      <span class="brand-mark">◈</span>
+      <h1>SPIELE</h1>
+      <button id="games-exit-btn" class="games-exit-btn" type="button">← SCHULE</button>
+    </header>
+    <p class="games-launcher-sub">Holografisches Spielearchiv — Modus wählen</p>
+    <div class="games-grid">
+      <button class="game-tile" data-game="chess" type="button">
+        <span class="game-tile-icon">♞</span>
+        <span class="game-tile-name">Holo Chess</span>
+        <span class="game-tile-desc">3D-Schach mit KI, Trainer &amp; Sprachsteuerung</span>
+      </button>
+      <button class="game-tile" data-game="connect4" type="button">
+        <span class="game-tile-icon">⬤</span>
+        <span class="game-tile-name">Vier Gewinnt</span>
+        <span class="game-tile-desc">Holografisches Fallscheiben-Duell, 2 Spieler</span>
+      </button>
+      <button class="game-tile" data-game="memory" type="button">
+        <span class="game-tile-icon">◈</span>
+        <span class="game-tile-name">Holo Memory</span>
+        <span class="game-tile-desc">Paare finden gegen die Zeit</span>
+      </button>
+      <button class="game-tile" data-game="snake" type="button">
+        <span class="game-tile-icon">▨</span>
+        <span class="game-tile-name">Holo Snake</span>
+        <span class="game-tile-desc">Klassisches Snake im Projektions-Grid</span>
+      </button>
+      <button class="game-tile" data-game="2048" type="button">
+        <span class="game-tile-icon">▦</span>
+        <span class="game-tile-name">Holo 2048</span>
+        <span class="game-tile-desc">Kacheln verschmelzen bis 2048</span>
+      </button>
+      <button class="game-tile" data-game="ttt" type="button">
+        <span class="game-tile-icon">╳</span>
+        <span class="game-tile-name">Tic-Tac-Toe</span>
+        <span class="game-tile-desc">Gegen einen Freund oder die KI</span>
+      </button>
+      <button class="game-tile" data-game="mines" type="button">
+        <span class="game-tile-icon">◉</span>
+        <span class="game-tile-name">Holo Minesweeper</span>
+        <span class="game-tile-desc">Felder aufdecken, Minen meiden</span>
+      </button>
+      <button class="game-tile" data-game="battleship" type="button">
+        <span class="game-tile-icon">🚢</span>
+        <span class="game-tile-name">Schiffe versenken</span>
+        <span class="game-tile-desc">Gegen die KI — finde alle Schiffe</span>
+      </button>
+      <button class="game-tile" data-game="sudoku" type="button">
+        <span class="game-tile-icon">▧</span>
+        <span class="game-tile-name">Holo Sudoku</span>
+        <span class="game-tile-desc">3 Schwierigkeitsgrade</span>
+      </button>
+      <button class="game-tile" data-game="reflex" type="button">
+        <span class="game-tile-icon">⚡</span>
+        <span class="game-tile-name">Reaktionstest</span>
+        <span class="game-tile-desc">Wie schnell klickst du bei Grün?</span>
+      </button>
+      <button class="game-tile" data-game="puzzle15" type="button">
+        <span class="game-tile-icon">▤</span>
+        <span class="game-tile-name">Schiebepuzzle</span>
+        <span class="game-tile-desc">15-Puzzle — sortiere die Kacheln</span>
+      </button>
+      <button class="game-tile" data-game="airhockey" type="button">
+        <span class="game-tile-icon">🏒</span>
+        <span class="game-tile-name">Air Hockey 3D</span>
+        <span class="game-tile-desc">2 Spieler in Echtzeit, W-A-S-D vs. Pfeiltasten</span>
+      </button>
+      <button class="game-tile" data-game="checkers" type="button">
+        <span class="game-tile-icon">⛃</span>
+        <span class="game-tile-name">3D-Dame</span>
+        <span class="game-tile-desc">Holografisches Damespiel, 2 Spieler abwechselnd</span>
+      </button>
+      <button class="game-tile" data-game="minigolf" type="button">
+        <span class="game-tile-icon">⛳</span>
+        <span class="game-tile-name">Mini-Golf 3D</span>
+        <span class="game-tile-desc">3 Bahnen, Kraft &amp; Winkel einstellen</span>
+      </button>
+      <button class="game-tile" data-game="billiard" type="button">
+        <span class="game-tile-icon">🎱</span>
+        <span class="game-tile-name">Billard 3D</span>
+        <span class="game-tile-desc">8-Ball, 2 Spieler abwechselnd</span>
+      </button>
+    </div>
+
+    <div class="highscore-block">
+      <h3 class="highscore-title">🏆 Highscores</h3>
+      <div id="highscoreList" class="highscore-list"></div>
+    </div>
+  </div>
+
+  <!-- ============ HOLO CHESS ============ -->
+  <div id="chessRoot" class="hidden pre-game">
+
+  <div class="holo-floor" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div id="boot-screen" class="boot-screen">
+    <div class="boot-scanline" aria-hidden="true"></div>
+    <div class="boot-content">
+      <div class="boot-mark">◈</div>
+      <h1 class="boot-title" id="boot-title"></h1>
+      <div class="boot-log" id="boot-log"></div>
+      <div class="boot-bar-track">
+        <div class="boot-bar-fill" id="boot-bar-fill"></div>
+      </div>
+      <div class="boot-percent" id="boot-percent">0%</div>
+    </div>
+  </div>
+
+  <div id="start-menu" class="start-menu">
+    <div class="start-box">
+      <div class="start-mark">◈</div>
+      <h2 class="start-title">HOLO CHESS</h2>
+      <p class="start-sub">Spielmodus wählen</p>
+
+      <button id="continue-btn" class="continue-btn hidden">▶ Letztes Spiel fortsetzen</button>
+
+      <div class="mode-row">
+        <button id="mode-1p-btn" class="mode-btn">
+          <span class="mode-icon">🤖</span>
+          <span class="mode-label">1 Spieler</span>
+          <span class="mode-desc">Gegen die KI</span>
+        </button>
+        <button id="mode-2p-btn" class="mode-btn">
+          <span class="mode-icon">🧑‍🤝‍🧑</span>
+          <span class="mode-label">2 Spieler</span>
+          <span class="mode-desc">Lokal, abwechselnd</span>
+        </button>
+        <button id="mode-trainer-btn" class="mode-btn">
+          <span class="mode-icon">🎓</span>
+          <span class="mode-label">Schachtrainer</span>
+          <span class="mode-desc">Mit Analyse &amp; Tipps</span>
+        </button>
+      </div>
+
+      <div id="menu-difficulty" class="menu-difficulty hidden">
+        <p class="menu-label">KI-Schwierigkeit</p>
+        <div class="difficulty-row">
+          <button class="diff-btn menu-diff-btn" data-level="leicht">Leicht</button>
+          <button class="diff-btn menu-diff-btn active" data-level="mittel">Mittel</button>
+          <button class="diff-btn menu-diff-btn" data-level="schwer">Schwer</button>
+        </div>
+      </div>
+
+      <div id="menu-color" class="menu-color hidden">
+        <p class="menu-label">Deine Farbe</p>
+        <div class="difficulty-row">
+          <button class="diff-btn menu-color-btn active" data-color="w">♔ Weiß</button>
+          <button class="diff-btn menu-color-btn" data-color="b">♚ Schwarz</button>
+        </div>
+      </div>
+
+      <div id="menu-clock" class="menu-clock hidden">
+        <p class="menu-label">Schachuhr</p>
+        <div class="difficulty-row">
+          <button class="diff-btn menu-clock-btn active" data-clock="0">Aus</button>
+          <button class="diff-btn menu-clock-btn" data-clock="5">5 Min</button>
+          <button class="diff-btn menu-clock-btn" data-clock="10">10 Min</button>
+          <button class="diff-btn menu-clock-btn" data-clock="20">20 Min</button>
+        </div>
+      </div>
+
+      <button id="start-game-btn" class="start-game-btn" disabled>Spiel starten</button>
+    </div>
+  </div>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">◈</span>
+      <div class="brand-text">
+        <h1>HOLO CHESS</h1>
+        <p class="tagline" id="mode-tagline">Taktisches Projektionssystem · Mensch gegen KI</p>
+      </div>
+    </div>
+    <button class="holo-game-back-btn chess-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    <div id="turn-badge" class="turn-badge turn-w">WEISS</div>
+  </header>
+
+  <main class="app-layout">
+
+    <aside class="panel panel-left">
+      <section class="panel-block">
+        <h2 class="panel-title">Status</h2>
+        <p id="status-text" class="status-text status-info">Neues Spiel — Weiß beginnt.</p>
+        <div id="clock-row" class="clock-row hidden">
+          <div class="clock-box clock-w">
+            <span class="clock-label">Weiß</span>
+            <span id="clock-w-time" class="clock-time">10:00</span>
+          </div>
+          <div class="clock-box clock-b">
+            <span class="clock-label">Schwarz</span>
+            <span id="clock-b-time" class="clock-time">10:00</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel-block" id="trainer-block" style="display:none;">
+        <h2 class="panel-title">🎓 Trainer-Feedback</h2>
+        <p id="trainer-feedback" class="trainer-feedback">Spiele einen Zug, um Feedback zu erhalten.</p>
+      </section>
+
+      <section class="panel-block">
+        <h2 class="panel-title">Geschlagene Figuren</h2>
+        <div class="captured-row">
+          <span class="captured-label">Weiß schlug</span>
+          <div id="captured-w" class="captured-pieces"></div>
+        </div>
+        <div class="captured-row">
+          <span class="captured-label">Schwarz schlug</span>
+          <div id="captured-b" class="captured-pieces"></div>
+        </div>
+      </section>
+
+      <section class="panel-block" id="difficulty-block">
+        <h2 class="panel-title">KI-Schwierigkeit</h2>
+        <div class="difficulty-row">
+          <button class="diff-btn" data-level="leicht">Leicht</button>
+          <button class="diff-btn active" data-level="mittel">Mittel</button>
+          <button class="diff-btn" data-level="schwer">Schwer</button>
+        </div>
+      </section>
+
+      <section class="panel-block">
+        <h2 class="panel-title">Ansicht</h2>
+        <div class="difficulty-row">
+          <button class="diff-btn view-btn" data-view="2d">2D</button>
+          <button class="diff-btn view-btn active" data-view="3d">3D</button>
+        </div>
+        <div class="camera-row" id="camera-row">
+          <button class="cam-btn" data-cam="white">♔ Weiß-Sicht</button>
+          <button class="cam-btn" data-cam="black">♚ Schwarz-Sicht</button>
+          <button class="cam-btn" data-cam="top">🦅 Vogelsicht</button>
+        </div>
+        <button id="reset-view-btn" class="ctrl-btn view-reset-btn">⟳ Kamera zurücksetzen</button>
+        <p class="hint-text" id="drag-hint">Im 3D-Modus: Mit Maus/Finger ziehen zum Drehen, Scrollen zum Zoomen.</p>
+      </section>
+
+      <section class="panel-block">
+        <div class="control-row">
+          <button id="hint-btn" class="ctrl-btn">💡 Zug-Tipp</button>
+          <button id="pgn-btn" class="ctrl-btn">📄 PGN export</button>
+        </div>
+        <div class="control-row">
+          <button id="new-game-btn" class="ctrl-btn">↺ Neues Spiel</button>
+          <button id="undo-btn" class="ctrl-btn">⟲ Zug zurück</button>
+        </div>
+        <button id="menu-btn" class="ctrl-btn menu-return-btn">☰ Hauptmenü</button>
+      </section>
+    </aside>
+
+    <section id="board-stage" class="board-stage view-3d">
+      <div class="eval-bar-wrap" id="eval-bar-wrap">
+        <div class="eval-bar-track">
+          <div class="eval-bar-fill" id="eval-bar-fill"></div>
+        </div>
+        <span class="eval-bar-label" id="eval-bar-label">+0.3</span>
+      </div>
+      <div class="board-pad">
+        <div class="holo-ring ring-1" aria-hidden="true"></div>
+        <div class="holo-ring ring-2" aria-hidden="true"></div>
+        <div id="board-frame" class="board-frame">
+          <div class="board-scanline" aria-hidden="true"></div>
+          <div id="board" class="board"></div>
+          <div id="fx-layer" class="fx-layer"></div>
+        </div>
+      </div>
+      <div id="three-container" class="three-container"></div>
+    </section>
+
+    <aside class="panel panel-right">
+      <section class="panel-block panel-history">
+        <h2 class="panel-title">Zughistorie</h2>
+        <div id="move-history" class="move-history"></div>
+      </section>
+
+      <section class="panel-block">
+        <h2 class="panel-title">Sprachsteuerung</h2>
+        <button id="assistant-toggle-btn" class="assistant-btn">🛰️ Jarvis aktivieren</button>
+        <button id="voice-btn" class="voice-btn">🎤 Sofort-Befehl</button>
+        <label class="toggle-row">
+          <input type="checkbox" id="announce-toggle">
+          <span>🔊 KI kündigt ihre Züge an</span>
+        </label>
+        <button id="help-btn" class="ctrl-btn help-btn">Befehle anzeigen</button>
+        <div id="voice-log" class="voice-log"></div>
+      </section>
+    </aside>
+
+  </main>
+
+  <div id="promo-modal" class="promo-modal">
+    <div class="promo-box">
+      <h3>Bauernumwandlung</h3>
+      <p>Wähle die neue Figur:</p>
+      <div id="promo-options" class="promo-options"></div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <span>Engine &amp; KI laufen vollständig lokal im Browser · Minimax mit Alpha-Beta-Suche · Rendering mit Three.js</span>
+  </footer>
+
+  </div>
+  <!-- /chessRoot -->
+
+  <!-- ============ VIER GEWINNT ============ -->
+  <div id="connect4Root" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>VIER GEWINNT</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="c4-status" class="holo-game-status">Spieler 🔵 ist am Zug.</p>
+    <div id="c4-board" class="c4-board" aria-label="Vier Gewinnt Spielfeld"></div>
+    <div class="holo-game-controls">
+      <button id="c4-restart-btn" class="ctrl-btn" type="button">↺ Neue Partie</button>
+    </div>
+  </div>
+
+  <!-- ============ HOLO MEMORY ============ -->
+  <div id="memoryRoot" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>HOLO MEMORY</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="mem-status" class="holo-game-status">Züge: 0 · Gefundene Paare: 0 / 8</p>
+    <div id="mem-board" class="mem-board" aria-label="Memory Spielfeld"></div>
+    <div class="holo-game-controls">
+      <button id="mem-restart-btn" class="ctrl-btn" type="button">↺ Neu mischen</button>
+    </div>
+  </div>
+
+  <!-- ============ HOLO SNAKE ============ -->
+  <div id="snakeRoot" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>HOLO SNAKE</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="snake-status" class="holo-game-status">Punkte: 0 · Pfeiltasten oder Wischen zum Steuern</p>
+    <canvas id="snake-canvas" width="360" height="360" class="snake-canvas"></canvas>
+    <div class="holo-game-controls">
+      <button id="snake-restart-btn" class="ctrl-btn" type="button">↺ Neues Spiel</button>
+    </div>
+    <div class="snake-dpad" id="snake-dpad">
+      <button data-dir="up" type="button">▲</button>
+      <div class="snake-dpad-row">
+        <button data-dir="left" type="button">◀</button>
+        <button data-dir="down" type="button">▼</button>
+        <button data-dir="right" type="button">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOLO 2048 ============ -->
+  <div id="g2048Root" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>HOLO 2048</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="g2048-status" class="holo-game-status">Punkte: 0 · Pfeiltasten oder Wischen zum Verschieben</p>
+    <div id="g2048-board" class="g2048-board" aria-label="2048 Spielfeld"></div>
+    <div class="holo-game-controls">
+      <button id="g2048-restart-btn" class="ctrl-btn" type="button">↺ Neues Spiel</button>
+    </div>
+  </div>
+
+  <!-- ============ TIC-TAC-TOE ============ -->
+  <div id="tttRoot" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>TIC-TAC-TOE</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <div class="ttt-mode-row">
+      <button class="diff-btn ttt-mode-btn active" data-ttt-mode="ai" type="button">Gegen KI</button>
+      <button class="diff-btn ttt-mode-btn" data-ttt-mode="2p" type="button">2 Spieler</button>
+    </div>
+    <p id="ttt-status" class="holo-game-status">Du bist ✕ — du beginnst.</p>
+    <div id="ttt-board" class="ttt-board" aria-label="Tic-Tac-Toe Spielfeld"></div>
+    <div class="holo-game-controls">
+      <button id="ttt-restart-btn" class="ctrl-btn" type="button">↺ Neue Runde</button>
+    </div>
+  </div>
+
+  <!-- ============ MINESWEEPER ============ -->
+  <div id="minesRoot" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>HOLO MINESWEEPER</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="mines-status" class="holo-game-status">💣 10 Minen · Linksklick: aufdecken · Rechtsklick: markieren</p>
+    <div id="mines-board" class="mines-board" aria-label="Minesweeper Spielfeld"></div>
+    <div class="holo-game-controls">
+      <button id="mines-restart-btn" class="ctrl-btn" type="button">↺ Neues Feld</button>
+    </div>
+  </div>
+
+  <!-- ============ SCHIFFE VERSENKEN ============ -->
+  <div id="battleshipRoot" class="hidden holo-game-shell battleship-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>SCHIFFE VERSENKEN</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="bs-status" class="holo-game-status">Klicke ein Feld auf dem gegnerischen Ozean, um zu schießen.</p>
+    <div class="battleship-boards">
+      <div class="battleship-board-wrap">
+        <h3>Gegner-Ozean</h3>
+        <div id="bs-enemy-board" class="bs-board" aria-label="Gegnerisches Spielfeld"></div>
+      </div>
+      <div class="battleship-board-wrap">
+        <h3>Deine Flotte</h3>
+        <div id="bs-own-board" class="bs-board" aria-label="Eigenes Spielfeld"></div>
+      </div>
+    </div>
+    <div class="holo-game-controls">
+      <button id="bs-restart-btn" class="ctrl-btn" type="button">↺ Neue Partie</button>
+    </div>
+  </div>
+
+  <!-- ============ SUDOKU ============ -->
+  <div id="sudokuRoot" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>HOLO SUDOKU</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <div class="ttt-mode-row">
+      <button class="diff-btn sudoku-diff-btn active" data-sudoku-diff="leicht" type="button">Leicht</button>
+      <button class="diff-btn sudoku-diff-btn" data-sudoku-diff="mittel" type="button">Mittel</button>
+      <button class="diff-btn sudoku-diff-btn" data-sudoku-diff="schwer" type="button">Schwer</button>
+    </div>
+    <p id="sudoku-status" class="holo-game-status">Zahl wählen, dann Feld anklicken.</p>
+    <div id="sudoku-board" class="sudoku-board" aria-label="Sudoku Spielfeld"></div>
+    <div class="sudoku-numpad" id="sudoku-numpad">
+      <button data-num="1" type="button">1</button>
+      <button data-num="2" type="button">2</button>
+      <button data-num="3" type="button">3</button>
+      <button data-num="4" type="button">4</button>
+      <button data-num="5" type="button">5</button>
+      <button data-num="6" type="button">6</button>
+      <button data-num="7" type="button">7</button>
+      <button data-num="8" type="button">8</button>
+      <button data-num="9" type="button">9</button>
+      <button data-num="0" type="button">⌫</button>
+    </div>
+    <div class="holo-game-controls">
+      <button id="sudoku-check-btn" class="ctrl-btn" type="button">✓ Prüfen</button>
+      <button id="sudoku-restart-btn" class="ctrl-btn" type="button">↺ Neues Rätsel</button>
+    </div>
+  </div>
+
+  <!-- ============ REAKTIONSTEST ============ -->
+  <div id="reflexRoot" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>REAKTIONSTEST</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="reflex-status" class="holo-game-status">Klicke "Start" und warte auf Grün.</p>
+    <div id="reflex-pad" class="reflex-pad reflex-idle">
+      <span id="reflex-pad-text">Start</span>
+    </div>
+    <p id="reflex-best" class="pomo-hint">Bestzeit: —</p>
+  </div>
+
+  <!-- ============ SCHIEBEPUZZLE ============ -->
+  <div id="puzzle15Root" class="hidden holo-game-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>SCHIEBEPUZZLE</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <p id="puzzle15-status" class="holo-game-status">Züge: 0</p>
+    <div id="puzzle15-board" class="puzzle15-board" aria-label="15-Puzzle Spielfeld"></div>
+    <div class="holo-game-controls">
+      <button id="puzzle15-restart-btn" class="ctrl-btn" type="button">↺ Neu mischen</button>
+    </div>
+  </div>
+
+  <!-- ============ AIR HOCKEY 3D ============ -->
+  <div id="airhockeyRoot" class="hidden holo-game-shell airhockey-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>AIR HOCKEY 3D</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <div class="airhockey-scoreboard">
+      <div class="airhockey-score-box airhockey-p1">
+        <span class="airhockey-score-label">Spieler 1 (W A S D)</span>
+        <span id="ah-score-p1" class="airhockey-score-value">0</span>
+      </div>
+      <div class="airhockey-score-box airhockey-p2">
+        <span class="airhockey-score-label">Spieler 2 (Pfeiltasten)</span>
+        <span id="ah-score-p2" class="airhockey-score-value">0</span>
+      </div>
+    </div>
+    <p id="ah-status" class="holo-game-status">Erster Spieler mit 7 Toren gewinnt.</p>
+    <div id="ah-canvas-container" class="airhockey-canvas-container"></div>
+    <div class="holo-game-controls">
+      <button id="ah-restart-btn" class="ctrl-btn" type="button">↺ Neue Partie</button>
+    </div>
+  </div>
+
+  <!-- ============ 3D-DAME ============ -->
+  <div id="checkersRoot" class="hidden holo-game-shell checkers-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>3D-DAME</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <div class="checkers-scoreboard">
+      <div class="checkers-score-box checkers-p1">
+        <span class="checkers-score-label">Spieler 1 (Rot)</span>
+        <span id="ck-score-p1" class="checkers-score-value">12</span>
+      </div>
+      <div class="checkers-score-box checkers-p2">
+        <span class="checkers-score-label">Spieler 2 (Weiß)</span>
+        <span id="ck-score-p2" class="checkers-score-value">12</span>
+      </div>
+    </div>
+    <p id="ck-status" class="holo-game-status">Spieler 1 (Rot) beginnt.</p>
+    <div id="ck-canvas-container" class="checkers-canvas-container"></div>
+    <div class="holo-game-controls">
+      <button id="ck-restart-btn" class="ctrl-btn" type="button">↺ Neue Partie</button>
+    </div>
+  </div>
+
+  <!-- ============ MINI-GOLF 3D ============ -->
+  <div id="minigolfRoot" class="hidden holo-game-shell minigolf-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>MINI-GOLF 3D</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <div class="minigolf-scoreboard">
+      <span id="mg-hole-label" class="minigolf-hole-label">Bahn 1 / 3</span>
+      <span id="mg-strokes-label" class="minigolf-strokes-label">Schläge: 0</span>
+      <span id="mg-total-label" class="minigolf-strokes-label">Gesamt: 0</span>
+    </div>
+    <p id="mg-status" class="holo-game-status">Ziehe mit der Maus vom Ball weg, um Richtung &amp; Kraft festzulegen, dann loslassen zum Schlagen.</p>
+    <div id="mg-canvas-container" class="minigolf-canvas-container"></div>
+    <div class="holo-game-controls">
+      <button id="mg-restart-btn" class="ctrl-btn" type="button">↺ Neu starten</button>
+    </div>
+  </div>
+
+  <!-- ============ BILLARD 3D ============ -->
+  <div id="billiardRoot" class="hidden holo-game-shell billiard-shell">
+    <header class="holo-game-header">
+      <span class="brand-mark">◈</span>
+      <h1>BILLARD 3D</h1>
+      <button class="holo-game-back-btn" data-back-to-launcher type="button">← Spielemenü</button>
+    </header>
+    <div class="billiard-scoreboard">
+      <div class="billiard-score-box billiard-p1">
+        <span class="billiard-score-label">Spieler 1 <span id="bl-p1-group"></span></span>
+        <span id="bl-score-p1" class="billiard-score-value">0</span>
+      </div>
+      <div class="billiard-score-box billiard-p2">
+        <span class="billiard-score-label">Spieler 2 <span id="bl-p2-group"></span></span>
+        <span id="bl-score-p2" class="billiard-score-value">0</span>
+      </div>
+    </div>
+    <p id="bl-status" class="holo-game-status">Spieler 1 ist am Zug. Ziehe von der weißen Kugel weg zum Zielen, loslassen zum Stoßen.</p>
+    <div id="bl-canvas-container" class="billiard-canvas-container"></div>
+    <div class="holo-game-controls">
+      <button id="bl-restart-btn" class="ctrl-btn" type="button">↺ Neue Partie</button>
+    </div>
+  </div>
+
+</div>
+<!-- /gamesRoot -->
+
+<!-- =================================================
+     FREIZEIT-MODUS (Zocken, Schlagzeug, GoPro, Allgemein)
+     ================================================= -->
+<div id="leisureRoot" class="hidden leisure-shell">
+
+  <header class="leisure-header">
+    <span class="brand-mark">◈</span>
+    <h1>FREIZEIT</h1>
+    <button id="leisure-exit-btn" class="games-exit-btn" type="button">← SCHULE</button>
+  </header>
+
+  <nav class="leisure-tabs">
+    <button class="leisure-tab active" data-leisure-tab="gaming" type="button">
+      🎮 Zocken
+      <span class="leisure-tab-hint">Backlog, Highscores, Trophäen...</span>
+    </button>
+    <button class="leisure-tab" data-leisure-tab="drums" type="button">
+      🥁 Schlagzeug
+      <span class="leisure-tab-hint">Metronom, Play-Along, Rudiments...</span>
+    </button>
+    <button class="leisure-tab" data-leisure-tab="gopro" type="button">
+      📷 GoPro
+      <span class="leisure-tab-hint">Clip-Ideen & Gesten-Scanner</span>
+    </button>
+    <button class="leisure-tab" data-leisure-tab="general" type="button">
+      🎲 Allgemein
+      <span class="leisure-tab-hint">JARVIS Radio, Würfel & Co.</span>
+    </button>
+  </nav>
+
+  <div class="leisure-grid" data-leisure-category="gaming">
+
+    <!-- BACKLOG-TRACKER -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>SPIELE-BACKLOG</h2><span>STATUS-TRACKER</span></div></div>
+      <div class="wb-form">
+        <input id="backlogTitle" type="text" placeholder="Spieltitel">
+        <select id="backlogStatus">
+          <option value="Warteliste">Warteliste</option>
+          <option value="Am Zocken">Am Zocken</option>
+          <option value="Durchgespielt">Durchgespielt</option>
+        </select>
+        <button id="backlogAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="backlogList" class="list"></div>
+    </section>
+
+    <!-- SPIELZEIT-LOG -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>SPIELZEIT-LOG</h2><span>SESSIONS &amp; WOCHENSTATISTIK</span></div></div>
+      <div class="wb-form">
+        <input id="sessionGame" type="text" placeholder="Spiel">
+        <input id="sessionMinutes" type="number" min="1" placeholder="Minuten">
+        <button id="sessionAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <p id="sessionWeekStat" class="pomo-hint">Diese Woche: 0 Minuten</p>
+      <div id="sessionList" class="list"></div>
+    </section>
+
+    <!-- TROPHÄEN-TRACKER -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>TROPHÄEN-TRACKER</h2><span>PLATIN &amp; CO.</span></div></div>
+      <div class="wb-form">
+        <input id="trophyGame" type="text" placeholder="Spiel">
+        <input id="trophyName" type="text" placeholder="Trophäe (z. B. Platin)">
+        <button id="trophyAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="trophyList" class="list"></div>
+    </section>
+
+    <!-- RELEASE-COUNTDOWN -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>RELEASE-COUNTDOWN</h2><span>KOMMENDE SPIELE</span></div></div>
+      <div class="wb-form">
+        <input id="releaseTitle" type="text" placeholder="Spieltitel">
+        <input id="releaseDate" type="date">
+        <button id="releaseAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="releaseList" class="list"></div>
+    </section>
+
+    <!-- SQUAD-PLANER -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>SQUAD-PLANER</h2><span>ZOCKEN MIT FREUNDEN</span></div></div>
+      <div class="wb-form">
+        <input id="squadNote" type="text" placeholder="z. B. Freitag 18 Uhr mit Finn & Leo">
+        <button id="squadAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="squadList" class="list"></div>
+    </section>
+
+    <!-- RANDOM GAME PICKER -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>WAS ZOCKE ICH HEUTE?</h2><span>RANDOM PICKER</span></div></div>
+      <p class="pomo-hint">Wählt zufällig ein Spiel aus deiner Warteliste.</p>
+      <button id="randomGameBtn" class="ctrl-btn" type="button">🎲 Spiel auswürfeln</button>
+      <p id="randomGameResult" class="random-result"></p>
+    </section>
+
+  </div>
+
+  <div class="leisure-grid hidden" data-leisure-category="drums">
+
+    <!-- METRONOM -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>METRONOM</h2><span>BPM-TRAINER</span></div></div>
+      <div class="metronome-display">
+        <span id="metroBpmValue">100</span> <span class="pomo-hint">BPM</span>
+      </div>
+      <input id="metroBpmSlider" type="range" min="30" max="240" value="100" class="metro-slider">
+      <div id="metroDot" class="metro-dot"></div>
+      <div class="pomo-controls">
+        <button id="metroStartBtn" class="ctrl-btn" type="button">▶ Start</button>
+        <button id="metroStopBtn" class="ctrl-btn" type="button">⏸ Stop</button>
+      </div>
+      <div class="wb-form">
+        <select id="metroBeats">
+          <option value="2">2/4</option>
+          <option value="3">3/4</option>
+          <option value="4" selected>4/4</option>
+          <option value="6">6/8</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- PLAY-ALONG -->
+    <section class="panel panel-wide">
+      <div class="panel-header"><div><h2>PLAY-ALONG</h2><span>METRONOM FOLGT SONGSTRUKTUR</span></div></div>
+      <p class="pomo-hint">Baue eine Struktur (z. B. Intro 4 Takte, Strophe 8 Takte, Refrain 8 Takte) — das Metronom zählt automatisch weiter und zeigt an, wo du gerade bist.</p>
+
+      <div class="wb-form">
+        <input id="paSectionName" type="text" placeholder="Abschnitt (z. B. Strophe)">
+        <input id="paSectionBars" type="number" min="1" placeholder="Takte" value="4">
+        <button id="paAddSectionBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="paSectionList" class="list"></div>
+
+      <div class="playalong-display">
+        <span id="paCurrentSection" class="playalong-current">Bereit</span>
+        <span id="paBarCounter" class="playalong-bars">Takt — / —</span>
+      </div>
+      <div class="pomo-controls">
+        <button id="paStartBtn" class="ctrl-btn" type="button">▶ Play-Along starten</button>
+        <button id="paStopBtn" class="ctrl-btn" type="button">⏸ Stopp</button>
+      </div>
+    </section>
+
+    <!-- ÜBUNGS-LOG -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>ÜBUNGS-LOG</h2><span>SONGS &amp; RUDIMENTS</span></div></div>
+      <div class="wb-form">
+        <input id="drumPracticeName" type="text" placeholder="Song oder Rudiment">
+        <input id="drumPracticeMinutes" type="number" min="1" placeholder="Minuten">
+        <button id="drumPracticeAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="drumPracticeList" class="list"></div>
+    </section>
+
+    <!-- RUDIMENTS-TRAINER -->
+    <section class="panel panel-wide">
+      <div class="panel-header"><div><h2>RUDIMENTS-TRAINER</h2><span>KLASSISCHE STANDARDS</span></div></div>
+      <input id="rudimentSearch" type="text" class="wb-search" placeholder="Rudiment suchen...">
+      <div id="rudimentList" class="rudiment-list"></div>
+    </section>
+
+    <!-- RHYTHMUS-TRAINER -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>RHYTHMUS-TRAINER</h2><span>TIMING ÜBEN</span></div></div>
+      <div class="wb-form">
+        <select id="rhythmNoteValue">
+          <option value="1">Viertel</option>
+          <option value="0.5">Achtel</option>
+          <option value="0.25">Sechzehntel</option>
+        </select>
+      </div>
+      <p id="rhythmStatus" class="pomo-hint">Klicke Start, dann tippe im Takt auf "Tap".</p>
+      <div class="pomo-controls">
+        <button id="rhythmStartBtn" class="ctrl-btn" type="button">▶ Start</button>
+        <button id="rhythmTapBtn" class="ctrl-btn" type="button">👆 Tap</button>
+      </div>
+    </section>
+
+    <!-- SONG-WUNSCHLISTE -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>SONG-WUNSCHLISTE</h2><span>NÄCHSTE LERNZIELE</span></div></div>
+      <div class="wb-form">
+        <input id="songWishTitle" type="text" placeholder="Songtitel">
+        <select id="songWishDifficulty">
+          <option value="Leicht">Leicht</option>
+          <option value="Mittel">Mittel</option>
+          <option value="Schwer">Schwer</option>
+        </select>
+        <button id="songWishAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="songWishList" class="list"></div>
+    </section>
+
+  </div>
+
+  <div class="leisure-grid hidden" data-leisure-category="gopro">
+
+    <!-- CLIP-IDEEN -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>CLIP-IDEEN</h2><span>NÄCHSTE TRICKS FÜRS FILMEN</span></div></div>
+      <div class="wb-form">
+        <input id="clipIdeaInput" type="text" placeholder="z. B. Backroll von der Kicker-Rampe">
+        <button id="clipIdeaAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="clipIdeaList" class="list"></div>
+    </section>
+
+    <!-- KAMERA-PRESETS -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>KAMERA-PRESETS</h2><span>GOPRO HERO 13 MERKZETTEL</span></div></div>
+      <div class="wb-form">
+        <input id="presetSituation" type="text" placeholder="Situation (z. B. Sonnig, Wasser)">
+        <input id="presetSettings" type="text" placeholder="Einstellung (z. B. 4K60, Linear, ND8)">
+        <button id="presetAddBtn" class="small-add-btn" type="button">+</button>
+      </div>
+      <div id="presetList" class="list"></div>
+    </section>
+
+    <!-- GESTEN-SCANNER -->
+    <section class="panel panel-wide gesture-panel">
+      <div class="panel-header">
+        <div>
+          <h2>🖐️ GESTEN-SCANNER</h2>
+          <span>KI-HANDERKENNUNG PER WEBCAM</span>
+        </div>
+      </div>
+      <p class="pomo-hint">Erkennt deine Handgesten oder scannt dein Gesicht im Iron-Man-Stil — live per Webcam, komplett lokal im Browser, nichts wird hochgeladen. Zum Start wird einmalig ein Erkennungsmodell aus dem Internet geladen (~10 MB).</p>
+
+      <div class="gesture-mode-row">
+        <button class="diff-btn gesture-mode-btn active" data-gesture-mode="hand" type="button">🖐️ Hand-Gesten</button>
+        <button class="diff-btn gesture-mode-btn" data-gesture-mode="face" type="button">🎯 Face-Scan</button>
+      </div>
+
+      <div class="gesture-stage">
+        <video id="gestureVideo" class="gesture-video" autoplay muted playsinline></video>
+        <canvas id="gestureCanvas" class="gesture-canvas"></canvas>
+        <div class="gesture-scanline"></div>
+      </div>
+
+      <div class="gesture-readout">
+        <span id="gestureStatus" class="gesture-status">Kamera aus</span>
+        <span id="gestureLabel" class="gesture-label">—</span>
+      </div>
+
+      <div class="pomo-controls">
+        <button id="gestureStartBtn" class="ctrl-btn" type="button">▶ Scanner starten</button>
+        <button id="gestureStopBtn" class="ctrl-btn" type="button">⏸ Stoppen</button>
+      </div>
+
+      <div class="gesture-legend">
+        <span>🖐️ Offene Hand — Gruß</span>
+        <span>✊ Faust — Power-Modus</span>
+        <span>✌️ Peace — Foto-Blitz</span>
+        <span>👍 Daumen hoch — Bestätigung</span>
+        <span>☝️ Zeigen — Fokus</span>
+        <span>↔️ Schnell wischen — Modus wechseln</span>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="leisure-grid hidden" data-leisure-category="general">
+
+    <!-- JARVIS RADIO -->
+    <section class="panel panel-wide">
+      <div class="panel-header">
+        <div>
+          <h2>🎵 JARVIS RADIO</h2>
+          <span>GENERATIVE AMBIENT-MUSIK · KEINE ECHTEN SONGS</span>
+        </div>
+      </div>
+      <p class="pomo-hint">Erzeugt entspannte Hintergrundmusik komplett lokal im Browser — keine echten Lieder, kein Streaming, kein Urheberrecht-Ärger. Praktisch für Zocken, Lernen oder einfach Chillen.</p>
+
+      <div class="radio-display">
+        <span id="radioStatus" class="radio-status">⏸ Gestoppt</span>
+        <span id="radioMoodLabel" class="radio-mood">Chill</span>
+      </div>
+
+      <div class="pomo-controls">
+        <button id="radioPlayBtn" class="ctrl-btn" type="button">▶ Play</button>
+        <button id="radioStopBtn" class="ctrl-btn" type="button">⏸ Stopp</button>
+      </div>
+
+      <div class="wb-form">
+        <select id="radioMoodSelect">
+          <option value="chill">🌙 Chill / Lo-fi</option>
+          <option value="focus">🎯 Fokus / minimal</option>
+          <option value="upbeat">⚡ Energiegeladen</option>
+        </select>
+      </div>
+
+      <p class="pomo-hint">Sprachbefehl: "Jarvis, Freizeit Modus aktivieren" schaltet den Modus um <strong>und</strong> startet direkt die Musik.</p>
+    </section>
+
+    <!-- MÜNZWURF / WÜRFEL / ZUFALLSGENERATOR -->
+    <section class="panel">
+      <div class="panel-header"><div><h2>MÜNZWURF</h2><span>KOPF ODER ZAHL</span></div></div>
+      <div class="random-display" id="coinDisplay">🪙</div>
+      <button id="coinFlipBtn" class="ctrl-btn" type="button">Werfen</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header"><div><h2>WÜRFEL</h2><span>D6</span></div></div>
+      <div class="random-display" id="diceDisplay">🎲</div>
+      <button id="diceRollBtn" class="ctrl-btn" type="button">Würfeln</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header"><div><h2>ZUFALLSGENERATOR</h2><span>ENTSCHEIDUNGSHILFE</span></div></div>
+      <div class="wb-form">
+        <input id="randNumMin" type="number" placeholder="Min" value="1">
+        <input id="randNumMax" type="number" placeholder="Max" value="100">
+        <button id="randNumBtn" class="small-add-btn" type="button">🎯</button>
+      </div>
+      <p id="randNumResult" class="random-result"></p>
+    </section>
+
+  </div>
+
+</div>
+<!-- /leisureRoot -->
+
+</div>
+
+<!-- =====================================================
+     EINSTELLUNGEN (in allen Modi sichtbar)
+     ===================================================== -->
+
+<button id="settingsToggleBtn" class="settings-toggle-btn" type="button" aria-label="Einstellungen öffnen">⚙</button>
+<button id="paletteToggleBtn" class="palette-toggle-btn" type="button" aria-label="Befehlspalette öffnen (Strg+K)">⌘</button>
+
+<div id="commandPaletteOverlay" class="palette-overlay hidden">
+  <div class="palette-panel">
+    <input id="paletteInput" type="text" class="palette-input" placeholder="Panel, Spiel oder Bereich suchen... (Strg+K)" autocomplete="off">
+    <div id="paletteResults" class="palette-results"></div>
+    <p class="palette-hint">↑↓ navigieren · Enter öffnen · Esc schließen</p>
+  </div>
+</div>
+
+<div id="settingsOverlay" class="settings-overlay hidden">
+  <div class="settings-panel">
+    <div class="settings-panel-header">
+      <h2>⚙ Einstellungen</h2>
+      <button id="settingsCloseBtn" class="settings-close-btn" type="button">×</button>
+    </div>
+
+    <div class="settings-block">
+      <label for="settingsVolume">🔊 Lautstärke (Metronom &amp; Sounds)</label>
+      <input id="settingsVolume" type="range" min="0" max="100" value="100">
+      <span id="settingsVolumeValue" class="settings-volume-value">100%</span>
+    </div>
+
+    <div class="settings-block">
+      <label>🎨 Farbthema</label>
+      <div class="settings-theme-row">
+        <button class="settings-theme-btn" data-theme="blue" style="--swatch:#00bfff" type="button">Blau</button>
+        <button class="settings-theme-btn" data-theme="red" style="--swatch:#ff4d67" type="button">Rot</button>
+        <button class="settings-theme-btn" data-theme="green" style="--swatch:#28df9c" type="button">Grün</button>
+        <button class="settings-theme-btn" data-theme="purple" style="--swatch:#cf42ff" type="button">Lila</button>
+      </div>
+    </div>
+
+    <div class="settings-block">
+      <label>📲 App</label>
+      <p class="pomo-hint" id="settingsPwaHint">Als App installieren, um JARVIS offline zu nutzen.</p>
+      <button id="settingsInstallBtn" class="ctrl-btn hidden" type="button">⬇ App installieren</button>
+    </div>
+  </div>
+</div>
+
+<!-- =====================================================
+     MODAL
+     ===================================================== -->
+
+<div
+    id="modalOverlay"
+    class="modal-overlay hidden"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Eintrag hinzufügen
+            </h2>
+
+            <button
+                id="closeModalBtn"
+                class="close-btn"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="modalForm">
+
+            <div id="modalFields"></div>
+
+            <div class="modal-actions">
+
+                <button
+                    id="cancelModalBtn"
+                    class="secondary-btn"
+                    type="button"
+                >
+                    ABBRECHEN
+                </button>
+
+                <button
+                    class="primary-btn modal-save-btn"
+                    type="submit"
+                >
+                    SPEICHERN
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="jarvis-script.js"></script>
+<script src="gesture-script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="chess-board3d.js"></script>
+<script src="chess-script.js"></script>
+<script src="games-script.js"></script>
+<script src="airhockey-script.js"></script>
+<script src="checkers-script.js"></script>
+<script src="minigolf-script.js"></script>
+<script src="billiard-script.js"></script>
+</body>
+</html>

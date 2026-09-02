@@ -1,0 +1,62 @@
+/* =========================================================
+   3D-DAME — gescoped unter #checkersRoot
+   ========================================================= */
+
+.checkers-shell {
+  max-width: 620px;
+}
+
+.checkers-scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 4px;
+}
+.checkers-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: var(--g-panel, rgba(6,18,34,.55));
+  min-width: 160px;
+}
+.checkers-p1 { border-color: rgba(255,77,103,.4); }
+.checkers-p2 { border-color: rgba(231,246,255,.35); }
+.checkers-score-label {
+  font-size: .72rem;
+  color: var(--g-text-dim, #6f93ab);
+  letter-spacing: .04em;
+}
+.checkers-score-value {
+  font-family: var(--g-font-display, 'Orbitron', sans-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.checkers-p1 .checkers-score-value { color: #ff4d67; }
+.checkers-p2 .checkers-score-value { color: #e7f6ff; }
+
+.checkers-canvas-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 62vh;
+  margin: 16px auto 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--g-border, rgba(0,229,255,.25));
+  background: #03050a;
+  cursor: pointer;
+}
+.checkers-canvas-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 560px) {
+  .checkers-canvas-container {
+    max-height: 50vh;
+  }
+}
